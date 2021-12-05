@@ -6,29 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".entrance">
 
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:hint="ENTER YOUR NAME"
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/nameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.318" />
+        android:layout_marginBottom="250dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        app:startIconDrawable="@drawable/ic_person"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:errorIconDrawable="@drawable/ic_error"
+        >
 
-    <EditText
-        android:id="@+id/room"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:hint="ENTER THE ROOM NAME"
-        app:layout_constraintBottom_toTopOf="@+id/join"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="NAME" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:startIconDrawable="@drawable/ic_room"
+        android:id="@+id/roomlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/nameLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        android:layout_marginBottom="250dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:errorIconDrawable="@drawable/ic_error"
+        >
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/room"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ROOM-ID" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/join"
@@ -37,8 +65,8 @@
         android:text="JOIN"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginBottom="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/roomlayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

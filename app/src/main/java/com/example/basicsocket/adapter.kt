@@ -1,11 +1,15 @@
 package com.example.basicsocket
 
 import android.content.Context
+import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 
 
 class adapter(val context: Context, val list: ArrayList<message>) :
@@ -22,6 +26,13 @@ class adapter(val context: Context, val list: ArrayList<message>) :
     }
     class ViewHolder3(itemview: View):RecyclerView.ViewHolder(itemview){
         val join_text: TextView = itemview.findViewById(R.id.join_text)
+    }
+    class ViewHolder4(itemview: View):RecyclerView.ViewHolder(itemview){
+        val out_image:ImageView=itemview.findViewById(R.id.outimage)
+    }
+    class ViewHolder5(itemview: View):RecyclerView.ViewHolder(itemview){
+        val img_name:TextView=itemview.findViewById(R.id.imgname)
+        val in_image:ImageView =itemview.findViewById(R.id.in_img)
     }
 
 
@@ -41,9 +52,18 @@ class adapter(val context: Context, val list: ArrayList<message>) :
             return ViewHolder2(view)
 
         }
-        else{
+        else if(viewType==3){
             view = layoutInflater.inflate(R.layout.join, parent, false)
             return ViewHolder3(view)
+
+        }
+        else if(viewType==4){
+            view = layoutInflater.inflate(R.layout.outgoing_image, parent, false)
+            return ViewHolder4(view)
+        }
+        else{
+            view = layoutInflater.inflate(R.layout.incoming_image, parent, false)
+            return ViewHolder5(view)
 
         }
     }
@@ -57,8 +77,15 @@ class adapter(val context: Context, val list: ArrayList<message>) :
         else if(getItemViewType(position)==2){
             (holder as ViewHolder2).send_msg.text =item.chat
         }
-        else{
+        else if(getItemViewType(position)==3){
             (holder as ViewHolder3).join_text.text =item.chat
+        }
+        else if(getItemViewType(position)==4){
+            (holder as ViewHolder4).out_image.load(item.chat.toUri())
+        }
+        else{
+            (holder as ViewHolder5).in_image.load(item.chat.toUri())
+            holder.img_name.text=item.username
         }
     }
 

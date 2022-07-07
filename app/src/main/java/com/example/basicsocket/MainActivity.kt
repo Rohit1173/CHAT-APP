@@ -1,6 +1,5 @@
 package com.example.basicsocket
 
-import android.app.ActionBar
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -8,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,8 +35,9 @@ class MainActivity : AppCompatActivity() {
         val actionbar: androidx.appcompat.app.ActionBar? = supportActionBar
         try {
             msocket = IO.socket("https://socket-chat45.herokuapp.com/")
+          //  msocket =IO.socket("https://192.168.31.238:3000")
         } catch (e: URISyntaxException) {
-
+            Toast.makeText(this,e.toString(),Toast.LENGTH_SHORT).show()
         }
         name = intent.getStringExtra("name").toString()
         room = intent.getStringExtra("room").toString()
@@ -94,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                 add_message(message(mychat.username, mychat.chat, 5))
             }
         }
-        msocket.on("disconnect") {
+        msocket.on("dis") {
             runOnUiThread {
                 add_message(message("1", it[0].toString() + " has left the chat ", 3))
             }
@@ -106,6 +107,11 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         startActivityForResult(intent, IMAGE_PICK_CODE);
+    }
+
+    override fun onBackPressed() {
+        msocket.emit("dis")
+        super.onBackPressed()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
